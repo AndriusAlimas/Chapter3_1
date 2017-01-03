@@ -12,26 +12,42 @@ public class BeerSelect extends HttpServlet {
 		// remeber always parameter get String value:
 		String param_color = request.getParameter("color");
 		String param_body = request.getParameter("body");
-		String result = "";
+		String one_size = "";
 		// you can even get array values:
 		String[] paramValues_size = request.getParameterValues("sizes");
 		if (paramValues_size == null) {
-			result = "no information";
-			paramValues_size = new String[] { result };
+			one_size = "no information";
+			paramValues_size = new String[] { one_size };
 		} else {
-			result = request.getParameterValues("sizes")[0];
+			one_size = request.getParameterValues("sizes")[0];
 		}
 		// created model object, which can help do business logic
 		BeerExpert model = new BeerExpert();
+		
+		// using form send information we pass this details to model method
+		// which return suggested brand_list of beers:
 		List brand_list = model.getBrands(param_color, param_body);
-		// String string4 = beerExpert.getOneSize(string3);
-		// List list2 = beerExpert.getAllSize(arrstring);
-		// httpServletRequest.setAttribute("styles", (Object)list);
-		// httpServletRequest.setAttribute("test_one", (Object)string4);
-		// httpServletRequest.setAttribute("test_all", (Object)list2);
-		// RequestDispatcher requestDispatcher =
-		// httpServletRequest.getRequestDispatcher("result.jsp");
-		// requestDispatcher.forward((ServletRequest)httpServletRequest,
-		// (ServletResponse)httpServletResponse);
+		
+		// using same variable because we one same thing one_size, but now 
+		// we using model class to getOneSize() :
+	    one_size = model.getOneSize(one_size);
+	    
+	    // get from array paramValues_size , full list of String with count number
+	    //again using model class logic:
+		 List all_size_list = model.getAllSize(paramValues_size);
+		 
+		// using ServletRequest interface method setAttribute() we set attribute 
+		// on request scope:
+		request.setAttribute("styles", brand_list);
+		request.setAttribute("test_one", one_size);
+		request.setAttribute("test_all",all_size_list );
+		
+		// ServletRequest interface has method getRquestDispatcher() to get this object
+		// then you can use method which can forward request and response to another
+		// servlet(jsp) to print view
+		 RequestDispatcher requestDispatcher =
+		 request.getRequestDispatcher("result.jsp");
+		 
+		 requestDispatcher.forward(request,response);
 	}
 }
