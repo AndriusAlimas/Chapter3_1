@@ -20,5 +20,21 @@
 	
 	<p>
 	<h3>request.getParameterValues(String parameter)[int index];</h3>
+	<%
+		String test_one = (String) request.getAttribute("test_one"); // you always must cast to current type
+	%>
+	<%=test_one%>
+	<p>
+	<h3>request.getParameterValues(String parameter);</h3>
+	<%
+		List test_all = (List) request.getAttribute("test_all");
+		it = test_all.iterator();
+
+		while (it.hasNext()) {
+			out.print("<br>" + it.next());
+		}
+	%>
+
+	<p>
 </body>
 </html>
