@@ -7,7 +7,7 @@ import com.example.model.BeerExpert;
 import java.util.*;
 
 public class BeerSelect extends HttpServlet {
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// from ServletRequest getParameter to get form parameter what you chose
 		// remeber always parameter get String value:
 		String param_color = request.getParameter("color");
