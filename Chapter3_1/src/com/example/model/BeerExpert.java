@@ -16,5 +16,23 @@ public class BeerExpert  {
         }
         return arrayList;
     }
-	
+	// this method just get longer answer more precise when you select from form
+	// it give you one answer size is ...
+	public String getOneSize(String body) {
+        String result = body;
+        switch (body) {
+            case "12oz": {
+                result = "size is 12";
+                break;
+            }
+            case "16oz": {
+                result = "size is 16";
+                break;
+            }
+            case "22oz": {
+                result = "size is 22";
+            }
+        }
+        return result;
+    }
 }
